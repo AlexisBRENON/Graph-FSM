@@ -1,0 +1,230 @@
+/**
+  * @brief Fichier d'entête du module @em DYNAMIC_ARRAY.
+  * Module de tableau dynamique.
+  *
+  * @author Alexis BRENON in STELLODY TEAM
+  * @file dynamic_array.h
+  */
+
+#ifndef __DYNAMIC_ARRAY_H__
+#define __DYNAMIC_ARRAY_H__
+
+
+/* ********************************************************************* */
+/*                                                                       */
+/*                        Définitions de types                           */
+/*                                                                       */
+/* ********************************************************************* */
+
+
+/**
+  * @enum eArrayError
+  * @brief 	Liste des erreurs possibles sur les tableaux dynamiques.
+  Codes d'erreur tableau.
+  */
+enum eArrayError
+{
+	ARRAY_OK, /**< Aucune erreur */
+	ARRAY_NULL_POINTER, /**< L'adresse du tableau est nulle */
+	ARRAY_BAD_ARGUMENTS, /**< Les arguments ne sont pas bons */
+	ARRAY_INDEX_OVERFLOW, /**< L'index dépasse la taille du tableau */
+	ARRAY_INDEX_UNDERFLOX /**< L'index est inférieur à 0 */
+};
+/**
+  * @typedef ArrayError
+  * @brief Redéfinition de type.
+  */
+typedef enum eArrayError ArrayError;
+
+/**
+  * @struct sDynamicArray
+  * @brief Structure représentant un tableau dynamique.
+  */
+struct sDynamicArray
+{
+	int* ppFisrtCell; /**< Adresse de la première case du tableau */
+
+	int iAllocatedSize; /**< Taille maximale du tableau */
+	int iFirstEmptyCell; /**< Index de la case de fin du tableau (vide) */
+};
+/**
+  * @typedef DynamicArray
+  * @brief Redéfinition de type.
+  */
+typedef struct sDynamicArray DynamicArray;
+
+
+/* ********************************************************************* */
+/*                                                                       */
+/*                 Fonctions relatives à la structure                    */
+/*                                                                       */
+/* ********************************************************************* */
+
+/**
+  * @fn DynamicArray* dynamicArrayCreate(void)
+  * @brief Fonction de création et initialisation du tableau (10 cases).
+  *
+  * @return L'adresse (dans le tas) de la structure du tableau.
+  */
+DynamicArray* dynamicArrayCreate(void);
+/**
+  * @fn ArrayError dynamicArrayDestroy (DynamicArray** ppArray)
+  * @brief Fonction de destruction du tableau.
+  *
+  * @param[in,out] ppArray Pointeur sur pointeur sur le tableau
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayDestroy (DynamicArray** ppArray);
+
+/**
+  * @fn ArrayError dynamicArrayInit (DynamicArray* pArray)
+  * @brief Initialisation d'un tableau dynamique.
+  *
+  * @param[in,out] pArray Pointeur sur le tableau dynamique
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayInit (DynamicArray* pArray);
+/**
+  * @fn ArrayError dynamicArrayRelease (DynamicArray* pArray)
+  * @brief Libération du tableau dynamique.
+  *
+  * @param[in,out] pArray Pointeur sur le tableau dynamique
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayRelease (DynamicArray* pArray);
+
+/**
+  * @fn ArrayError dynamicArraySet (DynamicArray* pArray,
+							int iIndex,
+							int iValue)
+  * @brief Remplace la valeur contenue dans la case d'index iIndex par
+  iValue.
+  *
+  * @param[in,out] pArray Pointeur sur le tableau
+  * @param[in] iIndex Index de la case à modifier (>= 0)
+  * @param[in] iValue Nouvelle valeur à stocker.
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArraySet (DynamicArray* pArray,
+							int iIndex,
+							int iValue);
+
+/**
+  * @fn ArrayError dynamicArrayGet (const DynamicArray* pArray,
+							int iIndex,
+							int* piValue)
+  * @brief Cette fonction permet de récupérer l'entier contenu à la case
+  iIndex.
+  *
+  * @param[in] pArray Pointeur sur le tableau
+  * @param[in] iIndex Index de la case à lire
+  * @param[out] piValue Pointeur où stocker l'entier
+  * @return Code d'erreur tableau.
+  */
+ArrayError dynamicArrayGet (const DynamicArray* pArray,
+							int iIndex,
+							int* piValue);
+
+/**
+  * @fn ArrayError dynamicArrayGetIndex (const DynamicArray* pArray,
+								int iValue,
+								int* piIndex);
+  * @brief Permet de récupèrer l'index de la cellule contenant la valeur iValue.
+  *
+  * @param[in] pArray Le tableau étudié.
+  * @param[in] iValue La valeur à retrouver
+  * @param[out] piIndex L'index de la donnée ou -1
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayGetIndex (const DynamicArray* pArray,
+								int iValue,
+								int* piIndex);
+
+/**
+  * @fn ArrayError dynamicArrayPush (DynamicArray* pArray,
+							int iValue)
+  * @brief Ajoute une case au tableau (en fin).
+  *
+  * @param[in,out] pArray Adresse du tableau
+  * @param[in] iValue Valeur à stocker
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayPush (DynamicArray* pArray,
+							int iValue);
+/**
+  * @fn ArrayError dynamicArrayPop (DynamicArray* pArray)
+  * @brief Supprime la dernière case du tableau.
+  *
+  * @param[in,out] pArray Pointeur sur le tableau
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayPop (DynamicArray* pArray);
+
+/**
+  * @fn ArrayError dynamicArrayGetSize (const DynamicArray* pArray,
+								int* piSize)
+  * @brief Obtenir la taille actuelle du tableau.
+  *
+  * @param[in] pArray Adresse du tableau
+  * @param[out] piSize Adresse où stocker le résultat
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayGetSize (const DynamicArray* pArray,
+								int* piSize);
+/**
+  * @fn ArrayError dynamicArrayGetMaxSize (const DynamicArray* pArray,
+								int* piMaxSize)
+  * @brief Obtenir la taille maximale instantannée du tableau.
+  *
+  * @param[in] pArray Adresse du tableau
+  * @param[out] piMaxSize Adresse où stocker le résultat
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayGetMaxSize (const DynamicArray* pArray,
+								int* piMaxSize);
+
+
+/**
+  * @fn ArrayError dynamicArrayRemove (DynamicArray* pArray,
+								int iIndex);
+  * @brief Supprime une cellule du tableau.
+  *
+  * @param[in,out] pArray Tableau à modifier.
+  * @param[in] iIndex Cellule à supprimer (0 = première).
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayRemove (DynamicArray* pArray,
+								int iIndex);
+
+/**
+  * @fn ArrayError dynamicArrayInsert (DynamicArray* pArray,
+								int iIndex,
+								int iValue);
+  * @brief Insère une cellule d'index iIndex.
+  *
+  * @param[in,out] pArray Tableau à modifier.
+  * @param[in] iIndex Index de la cellule à insérer.
+  * @param[in] iValue Valeur à stocker
+  * @return Code d'erreur tableau
+  */
+ArrayError dynamicArrayInsert (DynamicArray* pArray,
+								int iIndex,
+								int iValue);
+
+/* ********************************************************************* */
+/*                                                                       */
+/*                          Test de regression                           */
+/*                                                                       */
+/* ********************************************************************* */
+
+
+/**
+  * @fn int dynamicArrayRegressionTest ()
+  * @brief Test de regression du tableau.
+  *
+  * @return EXIT_SUCCESS
+  */
+int dynamicArrayRegressionTest ();
+
+
+#endif /* __DYNAMIC_ARRAY_H__ */

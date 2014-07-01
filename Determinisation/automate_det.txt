@@ -1,0 +1,11 @@
+2 2 1
+0
+0
+0 a 0
+0 b 1
+1 a 1
+1 b 0
+
+
+(a*ba*ba*)*
+Nombre pair de b.

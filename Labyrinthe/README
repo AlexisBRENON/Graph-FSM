@@ -1,0 +1,36 @@
+################################################################################
+  #                                                                          #  
+  # BRENON Alexis                                                            #  
+  # 10908598                                                                 #
+  #                                                                          #  
+################################################################################
+
+                                  Labyrinthe                                  
+                                 ------------
+                               
+                             Algorithme de Dijsktra
+                            ------------------------
+                              
+
+~~ Description ~~
+
+Ce projet génère un Labyrinthe orienté, où chaque lien a un cout de 1 (ceci 
+peut-être modifier dans le fichier main.c) et utilise l'algorithme de Dijsktra
+pour déterminer le chemin le plus court d'un point à un autre.
+
+~~ Compilation ~~
+
+Pour compiler :
+    ~$ cd BRENON_Labyrinthe
+    ~/BRENON_Labyrinthe$ make
+
+~~ Execution ~~
+
+Pour exécuter, une fois la compilation réussie sans erreur, il vous suffit de 
+taper la commande suivante :
+    ~/BRENON_Labyrinthe$ bin/Labyrinthe
+
+~~ Contacts ~~
+
+Alexis BRENON : brenon.alexis@gmail.com
+                               
